@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+ db:
+  image: postgres
+  restart: always
+  volumes:
+   - <Source-Path>:/var/lib/postgresql/data
+  ports:
+   - 5433:5433/tcp
+  environment:
+   POSTGRES_USER: <username>
+   POSTGRES_PASSWORD: pw
+   POSTGRES_DB: Test
+  healthcheck:
+  #can be checked with docker container inspect <Container-Name> | grep healthy
+   test: ["CMD", "pg_isready"]
+   retries: 4
+   interval: 10s   
+  
+ adminer:
+  image: adminer
+  restart: always
+  ports:
+   - 8080:8080

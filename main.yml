@@ -1,0 +1,12 @@
+---
+- hosts: 127.0.0.1
+  become: yes
+
+  tasks:
+  #ansible .yml has to bee in the same directory as docker-compose.yml
+   - docker_service:
+      project_src: ./
+      state: present
+
+       #volumes:
+        #db-data:
